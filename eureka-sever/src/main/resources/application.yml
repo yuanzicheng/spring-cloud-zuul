@@ -1,0 +1,41 @@
+spring:
+ application:
+  name: eureka-server
+
+server:
+  port: 8001
+eureka:
+  instance:
+    hostname: localhost
+    ip-address: 127.0.0.1
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.ip-address}:${server.port}/eureka/
+    register-with-eureka: false # 是否注册到Eureka Server，默认为true
+    fetch-registry: false # 是否从Eureka Server获取注册信息，默认为true
+
+---
+spring:
+  profiles: node1
+server:
+  port: 8001
+eureka:
+  instance:
+    hostname: localhost
+    ip-address: 127.0.0.1
+  client:
+    service-url:
+     defaultZone: http://127.0.0.1:8002/eureka/
+
+---
+spring:
+  profiles: node2
+server:
+  port: 8002
+eureka:
+  instance:
+    hostname: localhost
+    ip-address: 127.0.0.1
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8001/eureka/

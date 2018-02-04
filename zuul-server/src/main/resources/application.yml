@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: zuul-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+management:
+  security:
+    enabled: false
+
+zuul:
+  routes:
+    eureka-client-provider: /provider/**
+  prefix: /common
+  strip-prefix: true
+  ignored-patterns: /**/security/**
+
+  MyFilter:
+    pre:
+      disable: true
+
+
+
+
